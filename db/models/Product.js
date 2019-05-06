@@ -26,7 +26,7 @@ var Product =  db.sequelize.define(
       },
       price:{
         type:Sequelize.INTEGER,
-        allowNull:false
+        
       }
     },{
       timestamps:false,

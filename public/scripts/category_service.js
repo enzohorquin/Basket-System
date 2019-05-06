@@ -14,15 +14,15 @@ const getProductsCategories =  () => {
             return response.json()})
         .then(response => {
            
-            console.log(response);
+          
             for(let i=0; i<response.length;i++){
                 insertOnDB(response[i]);
             } 
             return response; 
-        }).then(response =>{
+        })
+        .then(response=>{
             fetchingProducts(response);
-            })  
-        .catch(err => console.log(err)); 
+        }).catch(err => console.log(err)); 
 }
 
 const insertOnDB = (data) => {
@@ -39,6 +39,9 @@ const insertOnDB = (data) => {
 const fetchingProducts = (response) => {
     for (let i=0; i<response.length ; i++){ 
         const categoria = response[i].id;
+        
+        console.log("NUEVA CATEGORIA: ");
+        console.log(categoria);
         fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${response[i].id}&official_store_id=all`, {
             method: 'GET',
             headers: {
@@ -46,23 +49,25 @@ const fetchingProducts = (response) => {
           },
             },).then(response => {return response.json()})
             .then(response =>{
-                console.log("PRODUCTO NUEVO");  
-                insertProductOnDB(response.results,categoria);
+                
+                for(let i=0; i<response.results.length;i++){   
+                    insertProductOnDB(response.results[i],categoria);
+                }
                     })
             .catch(err => console.log(err)) ; 
     }
 }
 
 const insertProductOnDB = (data,categoria) => {
+    
     const producto = {
-        id: data[0].id,
-        title: data[0].title ,
-        thumbnail: data[0].thumbnail,
+        id: data.id,
+        title: data.title ,
+        thumbnail: data.thumbnail,
         category_id:categoria ,
-        price: data[0].price
+        price: data.price
     }
-    console.log("PRODUCTO");
-    console.log(categoria);
+    
     models.Product.create(producto).then(result => console.log("Producto Agregado"+producto.title)
     ).catch(err => console.log(err));
 }

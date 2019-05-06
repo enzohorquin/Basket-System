@@ -11,8 +11,8 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
-//var callApi =  require('./public/scripts/product_service'); 
-//callApi();
+var callApi =  require('./public/scripts/product_service'); 
+callApi();
 
 //Si se ejecuta por primera vez en la pc, borrar los comentarios asi se hacen los insert en la base de datos. 
 
