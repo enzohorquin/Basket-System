@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const db = {}
+const db = {}; 
 const sequelize = new Sequelize('basket-system','root','123456',{
   host:'localhost',
   dialect:'mysql',
@@ -19,9 +19,10 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize ;
 
 module.exports = db;
-
 /*
-/sites/MLA/search?category={Category_id}&official_store_id=all&access_token=$ACCESS_TOKEN	Buscar todos los items enumerados en una determinada categoría en tiendas oficiales. */
+https://api.mercadolibre.com/sites/MLA/categories
 
+https://api.mercadolibre.com/sites/MLA/search?category={categoria}&official_store_id=all 
+Devuelve un Json, acceso en .results
 
-//https://api.mercadolibre.com/sites/MLA/categories
+*/
