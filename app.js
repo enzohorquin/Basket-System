@@ -1,25 +1,25 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var cors = require('cors');
+
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 var app = express();
 
+/* 
 var callApi =  require('./public/scripts/product_service'); 
 callApi();
-
-//Si se ejecuta por primera vez en la pc, borrar los comentarios asi se hacen los insert en la base de datos. 
-
-
-
+Si se ejecuta el servidor por primera vez, comentar la linea 14 y 15. (Scripts de insercion en la base de datos) 
 const db = require('./db/db');
 const Schema = require('./db/models/Schema');
+ */
+
+let router = require('./routes.js');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//Router
+app.use('/', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
