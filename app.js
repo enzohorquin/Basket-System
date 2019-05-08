@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const authentificator = require ('./middleware/authenticator');
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -33,6 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  
+  authentificator.auth(req, res, next);
+});
+
+
 //Router
 app.use('/', router);
 
@@ -51,8 +57,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { error: err });
 });
+
 app.listen(3000, function () {
   console.log("Express server listening on port 3000");
   });
 
 module.exports = app;
+

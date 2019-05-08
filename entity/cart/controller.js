@@ -1,12 +1,15 @@
 const mysqlService = require('../../service/mysql');
 
+
 const queries = require ('./queries') ;
 const CERO = 0;
 
 
 exports.add = (req,res,next) => {
+ 
+    const id_user = req.decoded.id_user; 
    
-    mysqlService.executeQuery(queries.addProduct,[ req.body.id_product, req.body.id_user ],(err,results) => {
+    mysqlService.executeQuery(queries.addProduct,[ req.body.id_product, id_user ],(err,results) => {
 
         if(err){
             console.log(err);
@@ -22,7 +25,7 @@ exports.add = (req,res,next) => {
 }
 
 exports.delete = (req,res,next) => {
-    mysqlService.executeQuery(queries.deleteProduct,[ req.body.id_product, req.body.id_user ],(err,results) => {
+    mysqlService.executeQuery(queries.deleteProduct,[ req.body.id_product, id_user ],(err,results) => {
 
         if(err){
             

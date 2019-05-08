@@ -7,10 +7,11 @@ const async = require ('async');
 
 exports.create_order = (req,res,next) => {
 
-    const id_user = req.body.id_user; 
+    const id_user = req.decoded.id_user; 
     let id_order;  
     let products = [] ; 
-    mysqlService.executeQuery(queries.getProducts,[ req.body.id_user ],(err,results) => {
+    
+    mysqlService.executeQuery(queries.getProducts,[ id_user ],(err,results) => {
 
         if(err){
             
@@ -19,7 +20,7 @@ exports.create_order = (req,res,next) => {
         else{
           
             products = results; 
-            console.log(products);
+          
             mysqlService.executeQuery(queries.insertOrder,[ id_user ],(err,results) => {
           
             if(err){

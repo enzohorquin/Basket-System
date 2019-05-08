@@ -3,8 +3,9 @@ const bcrypt = require ('bcrypt');
 const mysqlService = require('../../service/mysql');
 const queries = require ('./queries') ;
 const redisService = require('../../service/redis');
+const config = require('../../config/config');
 const CERO = 0;
-process.env.SECRET_KEY='secret';
+process.env.SECRET_KEY = config.secret;
 
 exports.login = (req,res,next) => {
 
@@ -21,6 +22,7 @@ exports.login = (req,res,next) => {
             const user = results[0];
         if(bcrypt.compareSync(password,user.password)){
             let usuario = {
+                id_user:user.id_user,
                 email:user.password,
                 password:user.password, 
                 adress: user.adress
