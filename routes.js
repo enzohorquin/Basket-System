@@ -12,7 +12,7 @@ for (const route of routes) {
     if (!requiredEntities[route.entity]) {
         requiredEntities[route.entity] = require(`./entity/${route.entity}/controller.js`);
     }
-
+ 
     router[route.type](route.path, requiredEntities[route.entity][route.method]);
 }
 

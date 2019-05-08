@@ -6,6 +6,7 @@ module.exports = {
                          .from("product")
                          .limit("100")
                          .toString(),
+    getProductById: `SELECT * FROM product where id = ? `,
     getProductByCategory: `SELECT * FROM product where category_id = ? LIMIT 100`,/* squel.select()
                                .from("product")
                                .where('category_id = ?')

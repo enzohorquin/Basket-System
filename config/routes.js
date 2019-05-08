@@ -1,6 +1,6 @@
 module.exports = [
-   /*  {
-        path: '/auth/signup',
+   {
+        path: '/user/signup',
         entity: 'user',
         method: 'signup',
         type: 'post',
@@ -24,7 +24,7 @@ module.exports = [
         }
     },
     {
-        path: '/auth/login',
+        path: '/user/login',
         entity: 'user',
         method: 'login',
         type: 'post',
@@ -43,17 +43,6 @@ module.exports = [
             }
         }
     },
-    {
-        path: '/auth/logout',
-        entity: 'user',
-        method: 'logout',
-        type: 'post',
-        auth: true,
-        input: {
-            params: {},
-            body: {}
-        }
-    },*/
     {
         path:'/product/search_by_cat/:category_id',
         entity: 'product',
@@ -115,7 +104,7 @@ module.exports = [
             params:{},
             body:{}
         }
-    }/* ,
+    } ,
     {
         path:'/cart/add',
         entity: 'cart',
@@ -130,7 +119,7 @@ module.exports = [
                     required:true
                 },
                 id_product: {
-                    type:'int',
+                    type:'string',
                     required:true
                 }
             }
@@ -173,19 +162,32 @@ module.exports = [
         }
     },
     {
-        path:'/order/all',
+        path:'/order/all/:id_user',
         entity: 'order',
         method:'all',
         type:'get',
         auth:true,
         input:{
-            params:{},
-            body:{
+            params:{
                 id_user: {
                     type: 'int',
                     required:true
                 }
+            },
+            body:{
+               
             }
         }
-    } */
+    },
+    {
+        path:'/category/all',
+        entity: 'category',
+        method:'all',
+        type:'get',
+        auth:true,
+        input:{
+            params:{},
+            body:{}
+        }
+    }
 ];
