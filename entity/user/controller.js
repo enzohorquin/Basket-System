@@ -5,19 +5,29 @@ const queries = require ('./queries') ;
 const redisService = require('../../service/redis');
 const config = require('../../config/config');
 const CERO = 0;
+const validateRegisterInput = require('../../middleware/register_validator');
+const validateLoginInput = require('../../middleware/login_validator');
 process.env.SECRET_KEY = config.secret;
 
 exports.login = (req,res,next) => {
 
     const email = req.body.email ; 
     const password = req.body.password; 
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    if(!isValid) {
+        return res.status(400).json(errors);
+    }
+
+   
     mysqlService.executeQuery(queries.userExists,[ email ],(err,results) => {
 
         if(err){
             res.status(400).json({data:'Internal Server Error'}); 
         }
         if(results.length === CERO){
-            res.status(200).json({data:"Usuario no registrado"}); 
+            errors.email = 'User not found'
+                return res.status(404).json(errors); 
         }else{
             const user = results[0];
         if(bcrypt.compareSync(password,user.password)){
@@ -33,7 +43,8 @@ exports.login = (req,res,next) => {
             
             res.status(200).json({data:token,status:"Usuario Logueado"});
         }else{
-            res.status(200).json({data:"Contraseña incorrecta"}); 
+            errors.password = 'Incorrect password';
+            res.status(200).json({errors}); 
         }
         }
     }); 
@@ -45,6 +56,12 @@ exports.signup = (req,res,next) => {
     let password = req.body.password; 
     const adress = req.body.adress;
     let hash_password; 
+
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    if(!isValid) {
+        return res.status(400).json(errors);
+    }
 
     mysqlService.executeQuery(queries.userExists,[ email ],(err,results) => {
 
