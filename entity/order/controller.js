@@ -30,7 +30,7 @@ exports.create_order = (req,res,next) => {
             else{
                 id_order = results.insertId; 
                 for(let i =0 ; i<products.length ; i++){
-                    mysqlService.executeQuery(queries.insertIntoProductOrder,[ id_order, products[i].id_product ],(err,results) => {
+                    mysqlService.executeQuery(queries.insertIntoProductOrder,[ id_order, products[i].id_product, products[i].count ],(err,results) => {
                        if(err){
                            
                            res.status(400).json({data:'Internal Server Error'}); 
@@ -57,7 +57,7 @@ exports.create_order = (req,res,next) => {
 exports.all = (req,res,next) => { 
 
     let resultados = []; 
-    const id_user = req.params.id_user; 
+    const id_user = req.decoded.id_user; 
     mysqlService.executeQuery(queries.getProductOrder,[ id_user ],(err,results) => {
 
         if(err){

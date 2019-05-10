@@ -3,25 +3,41 @@ import jwt_decode from 'jwt-decode';
 import { GET_ERRORS,SET_CURRENT_USER } from './type';
 import setAuthToken from '../service/setAuthToken';
 
-export const logIn = ( user ) =>  dispatch => {
+export const logIn = ( user,history ) =>  dispatch => {
+
      axios.post('http://localhost:3000/user/login',{
 
         email:user.email,
         password:user.password
         
     }).then(result => {
-        console.log(result);
+        
         const token  = result.data.data ;
-        console.log(token);
         sessionStorage.setItem('user',token); 
-                //setAuthToken(token);
-                const decoded = jwt_decode(token);
-                console.log(decoded);
-                dispatch(setCurrentUser(decoded));
+        const decoded = jwt_decode(token);
+        console.log(token);
+        history.push('/home');
+        dispatch(setCurrentUser(decoded));
 
     }).catch(err =>{
-        console.log(err);
+         dispatch({
+        type: GET_ERRORS,
+        payload: err
+    });
     })
+}
+
+export const restoreLogin = (history,path1) => (dispatch) => {
+
+if(loggedIn()){
+  const profile = getProfile(); 
+  dispatch(setCurrentUser(profile));
+  history.push('/home');
+} else {
+  history.push(path1);
+}
+
+
 }
 export const setCurrentUser = decoded => {
   return {
@@ -29,9 +45,14 @@ export const setCurrentUser = decoded => {
       payload: decoded
   }
 }
+export const validateToken = (history) => {
+  if(loggedIn){
 
-const getToken = () =>{
-
+    history.push('/home');
+  }
+}
+export const getToken = () =>{
+    
     return sessionStorage.getItem('user'); 
 }
 
@@ -43,8 +64,12 @@ export const getProfile = _ => {
   }
 export const loggedIn = () => {
     try{
+     
         const token = getToken();
-        return token; 
+        if(token === null)
+          return false; 
+        else
+          return true;
       }
       catch(err){
         return false;
@@ -69,8 +94,8 @@ export const register = ( newUser,history ) => dispatch => {
 
 }
 export const logoutUser = (history) => dispatch => {
-  localStorage.removeItem('user');
-  setAuthToken(false);
+  sessionStorage.removeItem('user');
+  //setAuthToken(false);
   dispatch(setCurrentUser({}));
   history.push('/login');
 }

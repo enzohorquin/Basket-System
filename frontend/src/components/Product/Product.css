@@ -1,0 +1,24 @@
+img {
+    margin: auto;
+    max-width: 187px;
+    max-height: 187px;
+    padding: 6% 0;
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+}
+.information {
+    overflow: hidden;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}

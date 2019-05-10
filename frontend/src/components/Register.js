@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { register } from '../actions/user';
+import { register,restoreLogin } from '../actions/user';
 import classnames from 'classnames';
+
+
 
 class Register extends Component {
 
@@ -19,11 +21,13 @@ class Register extends Component {
         }
        
     }
+    
     componentDidMount() {
-        if(this.props.auth.isAuthenticated) {
-            this.props.history.push('/');
-        }
+
+        this.props.restoreLogin(this.props.history,'/register'); 
     }
+    
+    
 
     handleInputChange = (e) => {
         this.setState({
@@ -44,6 +48,7 @@ class Register extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
         if(nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
@@ -146,4 +151,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps,{ register})(withRouter(Register))
+export default connect(mapStateToProps,{ register,restoreLogin})(withRouter(Register));

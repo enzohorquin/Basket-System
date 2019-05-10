@@ -4,39 +4,54 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/user';
 import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faHistory } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { faStore } from '@fortawesome/free-solid-svg-icons'
 
 class Navbar extends Component {
 
-    onLogout(e) {
+    onLogout = (e) => {
         e.preventDefault();
+      
         this.props.logoutUser(this.props.history);
     }
 
     render() {
-        const {isAuthenticated, user} = this.props.auth;
+        const { isAuthenticated } = this.props.auth;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-                <a href="/" className="nav-link" onClick={this.onLogout.bind(this)}>
-                    <img src={user.avatar} alt={user.name} title={user.name}
-                        className="rounded-circle"
-                        style={{ width: '25px', marginRight: '5px'}} />
-                            Logout
-                </a>
+            <li className="nav-item">
+                 <Link className="nav-link" to="/store">  <FontAwesomeIcon icon={faStore} /></Link>
+            </li>
+            <li className="nav-item">
+                 <Link className="nav-link" to="/cart">  <FontAwesomeIcon icon={faShoppingCart} /></Link>
+            </li>
+            <li className="nav-item">
+                 <Link className="nav-link" to="/order">  <FontAwesomeIcon icon={faHistory} /></Link>
+            </li>
+            <li>
+                <Link to="/" className="nav-link" onClick={this.onLogout}><FontAwesomeIcon icon={faSignOutAlt} /></Link>
+            </li>    
             </ul>
         )
       const guestLinks = (
         <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <Link className="nav-link" to="/register">Sign Up</Link>
+                <Link className="nav-link" to="/register"><FontAwesomeIcon icon={faUserAlt} /></Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/login">Sign In</Link>
+                <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faSignInAlt} /></Link>
             </li>
         </ul>
       )
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Redux Node Auth</Link>
+                <Link className="navbar-brand" to="/home"><FontAwesomeIcon icon={faShoppingBasket} /></Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>

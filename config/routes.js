@@ -114,10 +114,22 @@ module.exports = [
         input:{
             params:{},
             body:{
-                id_user: {
-                    type: 'int',
+               
+                id_product: {
+                    type:'string',
                     required:true
-                },
+                }
+            }
+        }
+    },{
+        path:'/cart/rest_product',
+        entity: 'cart',
+        method:'rest_product',
+        type:'post',
+        auth:true,
+        input:{
+            params:{},
+            body:{
                 id_product: {
                     type:'string',
                     required:true
@@ -134,10 +146,7 @@ module.exports = [
         input:{
             params:{},
             body:{
-                id_user: {
-                    type: 'int',
-                    required:true
-                },
+                
                 id_product: {
                     type:'int',
                     required:true
@@ -154,10 +163,6 @@ module.exports = [
         input:{
             params:{},
             body:{
-                id_user: {
-                    type: 'int',
-                    required:true
-                }
             }
         }
     },
@@ -169,10 +174,6 @@ module.exports = [
         auth:true,
         input:{
             params:{
-                id_user: {
-                    type: 'int',
-                    required:true
-                }
             },
             body:{
                
