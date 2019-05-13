@@ -38,7 +38,7 @@ exports.login = (req,res,next) => {
                 adress: user.adress
             }
             let token = jwt.sign(usuario,process.env.SECRET_KEY,{
-              expiresIn:1440
+              expiresIn:3000
             })
             
             res.status(200).json({data:token,status:"Usuario Logueado"});

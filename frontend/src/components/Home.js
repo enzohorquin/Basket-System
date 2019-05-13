@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { restoreLogin } from '../actions/user';
 import { connect } from 'react-redux';
-import ProductContainer from './Container/ProductContainer';
+import  CategoryContainer  from './CategoryContainer/CategoryContainer';
+import  ProductContainer  from './ProductContainer/ProductContainer';
+import Product from './ProductContainer/Product';
 
 export class Home extends Component {
     componentDidMount(){
@@ -9,9 +11,11 @@ export class Home extends Component {
     }
     render() {
         return (
-            <div style ={{textAlign:'center'}}>
+            <div>
+               <CategoryContainer />
                 <ProductContainer />
             </div>
+            
         );
     }
 }

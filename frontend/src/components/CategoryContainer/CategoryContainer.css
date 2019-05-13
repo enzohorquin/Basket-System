@@ -1,0 +1,35 @@
+.seccion-categorias {
+    width: 100% ;
+    z-index:1000;
+    background-color: tomato;
+    margin: 0;
+}
+.header-categorias {
+    position: relative;
+    margin: 0 ;
+    max-width: 1240px;
+    z-index: 99;
+}
+ .categorias-container {
+    width: 100%;
+    height: 80px;
+}
+.categorias-lista {
+    position: relative;
+    padding-left: 160px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content:flex-start;
+   
+}
+
+.categorias-container :hover {
+    color: black;
+}
+
+.categorias-container :focus {
+    color: black;
+}

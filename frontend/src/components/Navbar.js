@@ -25,9 +25,7 @@ class Navbar extends Component {
         const { isAuthenticated } = this.props.auth;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-                 <Link className="nav-link" to="/store">  <FontAwesomeIcon icon={faStore} /></Link>
-            </li>
+    
             <li className="nav-item">
                  <Link className="nav-link" to="/cart">  <FontAwesomeIcon icon={faShoppingCart} /></Link>
             </li>
