@@ -3,7 +3,8 @@ import { restoreLogin } from '../actions/user';
 import { connect } from 'react-redux';
 import  CategoryContainer  from './CategoryContainer/CategoryContainer';
 import  ProductContainer  from './ProductContainer/ProductContainer';
-import Product from './ProductContainer/Product';
+import  CartContainer  from './CartContainer/CartContainer';
+import './Home.css';
 
 export class Home extends Component {
     componentDidMount(){
@@ -13,7 +14,13 @@ export class Home extends Component {
         return (
             <div>
                <CategoryContainer />
-                <ProductContainer />
+               <div className="container">
+                    <div className="row">
+                        <ProductContainer />
+                         <CartContainer />
+                    </div>
+                </div>
+                
             </div>
             
         );

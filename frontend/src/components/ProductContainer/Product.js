@@ -3,6 +3,7 @@ import './Product.css';
 import {connect} from 'react-redux';
 import {addCart} from '../../actions/cart';
 
+
 export const Product = (props) =>  
     (
         <li className="container-products">

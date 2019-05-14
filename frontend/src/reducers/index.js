@@ -4,10 +4,15 @@ import authReducer from './authReducer';
 import categoryItems from './categoryReducer'
 import getProducts from './productReducer';
 import cartItems from './cartReducer';
+import searchItem from './searchReducer';
+import paginationItem from './paginationReducer';
+
 export default combineReducers({
     errors: errorReducer,
     auth: authReducer,
     categories:categoryItems,
     products:getProducts,
-    list:cartItems
+    list:cartItems,
+    search:searchItem,
+    currentPage:paginationItem
 });

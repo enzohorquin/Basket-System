@@ -9,15 +9,18 @@ export const cartItems = (state = initialState,action) =>{
     switch(action.type){
 
         case ADD_CART: {
+            
             let itemExists=false;
-
             if(state.list !== undefined){
-			let newBasket = state.list.map(basketItem => {
+
+			    let newBasket = state.list.map(basketItem => {
 				if(basketItem.id === action.payload.id){
-					itemExists=true;
-					return {...basketItem, count: basketItem.count+1};
-				}else{
-					return basketItem;
+                
+                    itemExists=true;
+                    return {...basketItem, count: basketItem.count+1};
+                    
+				}   else   {
+					    return basketItem;
 				}
 			});
         
@@ -41,7 +44,9 @@ export const cartItems = (state = initialState,action) =>{
         case DELETE_CART:{
            
             if(state.list !== undefined){
+
 			let newBasket = state.list.map(basketItem => {
+
 				if(basketItem.id === action.payload.id){
                    
                     if(basketItem.count > 0)
@@ -51,7 +56,8 @@ export const cartItems = (state = initialState,action) =>{
                             return{ ...state,list:state.filter(item => item.id !== action.payload.id) }
                         }
 				}   else    {
-					return basketItem;
+                        
+                        return basketItem;
 				    }
             });
         
@@ -64,6 +70,7 @@ export const cartItems = (state = initialState,action) =>{
     
     }
        
+        // eslint-disable-next-line no-fallthrough
         case CLEAR_CART: {
 
             return {

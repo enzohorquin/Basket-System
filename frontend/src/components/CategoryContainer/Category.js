@@ -4,6 +4,7 @@ import COLUMNS from '../../icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { selectCategoria } from '../../actions/category'; 
 import { getProducts } from '../../actions/product';
+import { setCurrentPage } from '../../actions/pagination'; 
 import { connect } from 'react-redux';
 
 export const Category = (props) => {
@@ -12,7 +13,8 @@ export const Category = (props) => {
     return (
             <li className="lista" onClick={() => {
                 props.selectCategoria(props.id)
-                props.getProducts(props.id)}}>
+                props.getProducts(props.id)
+                props.setCurrentPage(1)}}>
             <FontAwesomeIcon icon={icono}/>
             <div>
                 {props.name}
@@ -22,4 +24,4 @@ export const Category = (props) => {
     );
 }
 
-export default connect(null,{ selectCategoria,getProducts }) (Category);
+export default connect(null,{ selectCategoria,getProducts, setCurrentPage }) (Category);

@@ -8,8 +8,7 @@ export const getProducts = ( category_id ) => dispatch => {
         headers: {'Authorization': 'Bearer ' + getToken()}
     };
     return axios.get('http://localhost:3000/product/search_by_cat/'+category_id,config).then(result=>{
-        console.log("PUTA ENTRO ESCUPIENDO")
-       console.log(result.data.data);
+        
         dispatch(setProducts(result.data.data)); 
     }).catch(err => {
         dispatch(setProducts([]));    
@@ -22,4 +21,18 @@ const setProducts = (result) => {
         type:SET_PRODUCTS,
         payload:result
     }
+}
+
+export const searchProduct = ( product ) => dispatch => { 
+    let config = {
+        headers: {'Authorization': 'Bearer ' + getToken()}
+    };
+    return axios.get('http://localhost:3000/product/search/'+product.target.value,config).then(result=>{
+      
+       console.log(result.data.data);
+        dispatch(setProducts(result.data.data)); 
+    }).catch(err => {
+        dispatch(setProducts([]));    
+    })
+
 }

@@ -5,15 +5,17 @@ import './CategoryContainer.css';
 import Category from './Category';
 
 
+
 export class CategoryContainer extends React.Component {
     
     componentDidMount(){
         this.props.getCategories();
         
+        
     }
    
     render(){
-        return  <nav className="navbar navbar-expand-lg navbar-danger bg-danger">
+        return  <nav className="navbar navbar-expand-lg navbar-danger color-nav">
                     <div className="header-categorias" >
                          <div className="categorias-container">
                             <ul className="categoria-lista">

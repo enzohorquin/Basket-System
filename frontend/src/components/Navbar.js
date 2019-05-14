@@ -11,7 +11,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
-import { faStore } from '@fortawesome/free-solid-svg-icons'
+import {searchProduct} from '../actions/product'
 
 class Navbar extends Component {
 
@@ -25,7 +25,7 @@ class Navbar extends Component {
         const { isAuthenticated } = this.props.auth;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-    
+          
             <li className="nav-item">
                  <Link className="nav-link" to="/cart">  <FontAwesomeIcon icon={faShoppingCart} /></Link>
             </li>
@@ -48,8 +48,11 @@ class Navbar extends Component {
         </ul>
       )
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light color-nav">
                 <Link className="navbar-brand" to="/home"><FontAwesomeIcon icon={faShoppingBasket} /></Link>
+                <input hidden={!isAuthenticated} style ={{'width':'600px','position':'relative'}}type="text" className="form-control" onChange={this.props.searchProduct} placeholder="Search Product"/>
+               
+               
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
@@ -66,4 +69,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser,searchProduct })(withRouter(Navbar));
