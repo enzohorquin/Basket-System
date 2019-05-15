@@ -1,14 +1,34 @@
 import React from 'react'; 
 import './CartContainer.css'; 
 import { connect } from 'react-redux';
-
+import CartItem from './CartItem';
 
 export class CartContainer extends React.Component {
 
 render(){
+
+    let amount =0;
+     amount = (this.props.cart || []).map(item =>{
+       return item.price*item.count
+    })
+    let suma = amount.reduce((a, b) => a + b, 0);
+    let total = this.props.cart.length !== 0 ? 'Total: '+suma+'$' : '' ;
+    const button =this.props.cart.length !== 0 ? (<button tpye="button"className="btn btn-primary boton" >Purchase</button>) : null;
+
     return (
         <div className="col-4 container-cart">
-
+            <span style={{'font':'21px Arial'}}>Cart: </span>
+            <ul className="list-style">
+            {
+                (this.props.cart || []).map(item => (<CartItem key={item.id} {...item} />))
+            }
+            <div className="row">
+            <span className="total">{
+               total
+            }</span>
+            {button}
+            </div>
+            </ul>
         </div>
     )
 }

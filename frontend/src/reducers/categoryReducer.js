@@ -2,6 +2,7 @@ import { SET_CATEGORIAS, SET_CATEGORIA_SELECCIONADA} from '../actions/type';
 const initialState = {
     categories: [],
     category: "MLA1000"
+   
  }
  export const categoryItems = (state = initialState, action ) => {
 
@@ -13,7 +14,7 @@ const initialState = {
          
             return { ...state, category:action.payload } ; 
         }
-        default: return state;
+        default: return {...state};
     }
  }
  export default categoryItems;

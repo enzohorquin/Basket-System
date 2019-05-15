@@ -7,10 +7,10 @@ const initialState = {
 export const getProducts = (state = initialState, action) => {
     switch(action.type){
         case SET_PRODUCTS: {
-            return { ...state, products: action.payload };
+            return Object.assign({},state, {products: action.payload}) ;
         }
         
-        default: return state;
+        default: return {...state};
     }
 }
 

@@ -1,9 +1,19 @@
 .container-cart{ 
-    
-
-    border: 2px solid black;
     padding:2px;
-    height:400px;
+    height:100%;
     margin-top:10px;
+    width:35%;
+}
+
+.list-style{
+    list-style: circle;
+}
+.total{
+    border-top: 1px solid grey;
+    
+    font-size:30px;
+}
+.boton {
+    margin:5px;
     
 }

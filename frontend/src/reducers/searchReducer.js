@@ -9,7 +9,7 @@ export const searchItem = ( state = initialState, action ) => {
         case 'SET_SEARCH':{
             return {...state,search:action.payload}
         }
-    default: return state; 
+    default: return {...state}; 
     }
 }
 export default searchItem;

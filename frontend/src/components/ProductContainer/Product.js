@@ -11,7 +11,7 @@ export const Product = (props) =>
             <img  src={props.thumbnail} alt={props.title} />  
             <div className="information">
                 {props.price+ '$ - '+props.title} 
-                <button className="button" onClick={() => {props.addCart(props)}}>Agregar Carrito</button>
+                <button className="button" onClick={() => {props.addCart(props)}}>Add to Cart</button>
             </div>
             </div>  
         </li>

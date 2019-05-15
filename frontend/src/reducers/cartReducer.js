@@ -45,21 +45,23 @@ export const cartItems = (state = initialState,action) =>{
            
             if(state.list !== undefined){
 
-			let newBasket = state.list.map(basketItem => {
+			let newBasket = state.list.reduce((basket,basketItem) => {
 
 				if(basketItem.id === action.payload.id){
-                   
-                    if(basketItem.count > 0)
-                        return {...basketItem, count: basketItem.count-1};
-                    else
-                        {
-                            return{ ...state,list:state.filter(item => item.id !== action.payload.id) }
-                        }
-				}   else    {
-                        
-                        return basketItem;
-				    }
-            });
+                    if(basketItem.count > 1){
+                        return basket.concat({...basketItem, count: basketItem.count-1});
+                    } else {
+                        return basket;
+                    }
+                    
+                }   
+                
+                return  basket.concat({...basketItem});;
+				    
+            },[]);
+            return {
+                ...state,list:newBasket
+            }
         
             }
         else
@@ -79,7 +81,7 @@ export const cartItems = (state = initialState,action) =>{
 			};
         }
 
-        default: return {state};
+        default: return {...state};
     
     }
 }

@@ -1,0 +1,14 @@
+.titulo{
+    color:#0066c0
+}
+.precio{
+    color:#B12704;
+    padding:5px;
+    font-size:20px;
+}
+.cantidad{
+    border: 1px solid none;
+    border-radius: 1px;
+    padding:2px;
+    margin:2px;
+}
