@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/user';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { faHistory } from '@fortawesome/free-solid-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 import {searchProduct} from '../actions/product'
+import { setCurrentPage } from '../actions/pagination'
 
 class Navbar extends Component {
 
@@ -26,9 +26,7 @@ class Navbar extends Component {
         const authLinks = (
             <ul className="navbar-nav ml-auto">
           
-            <li className="nav-item">
-                 <Link className="nav-link" to="/cart">  <FontAwesomeIcon icon={faShoppingCart} /></Link>
-            </li>
+            
             <li className="nav-item">
                  <Link className="nav-link" to="/order">  <FontAwesomeIcon icon={faHistory} /></Link>
             </li>
@@ -50,7 +48,7 @@ class Navbar extends Component {
         return(
             <nav className="navbar navbar-expand-lg navbar-light color-nav">
                 <Link className="navbar-brand" to="/home"><FontAwesomeIcon icon={faShoppingBasket} /></Link>
-                <input hidden={!isAuthenticated} style ={{'width':'600px','position':'relative'}}type="text" className="form-control" onChange={this.props.searchProduct} placeholder="Search Product"/>
+                <input hidden={!isAuthenticated} style ={{'width':'600px','position':'relative'}}type="text" className="form-control" onChange={(event) => {this.props.searchProduct(event); this.props.setCurrentPage(1)}} placeholder="Search Product"/>
                
                
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -69,4 +67,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { logoutUser,searchProduct })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser,searchProduct,setCurrentPage })(withRouter(Navbar));

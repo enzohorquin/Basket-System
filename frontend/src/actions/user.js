@@ -20,9 +20,10 @@ export const logIn = ( user,history ) =>  dispatch => {
         dispatch(setCurrentUser(decoded));
 
     }).catch(err =>{
+        
          dispatch({
         type: GET_ERRORS,
-        payload: err
+        payload: err.response.data.errors
     });
     })
 }

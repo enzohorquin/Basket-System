@@ -2,6 +2,9 @@ import React from 'react';
 import './CartContainer.css'; 
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { requestOrder } from '../../actions/order';
 
 export class CartContainer extends React.Component {
 
@@ -13,11 +16,11 @@ render(){
     })
     let suma = amount.reduce((a, b) => a + b, 0);
     let total = this.props.cart.length !== 0 ? 'Total: '+suma+'$' : '' ;
-    const button =this.props.cart.length !== 0 ? (<button tpye="button"className="btn btn-primary boton" >Purchase</button>) : null;
+    const button =this.props.cart.length !== 0 ? (<button tpye="button" onClick={   ()=> {this.props.requestOrder(this.props.cart)}} className="btn btn-primary boton" >Purchase</button>) : null;
 
     return (
         <div className="col-4 container-cart">
-            <span style={{'font':'21px Arial'}}>Cart: </span>
+            <FontAwesomeIcon icon={faShoppingCart} />
             <ul className="list-style">
             {
                 (this.props.cart || []).map(item => (<CartItem key={item.id} {...item} />))
@@ -37,7 +40,7 @@ render(){
 const mapStateToProps = (state) => ({
     cart:state.list.list
 })
-export default connect(mapStateToProps,null)(CartContainer);
+export default connect(mapStateToProps,{ requestOrder })(CartContainer);
 
 /*
 This is a web application where the user can shop differents products from our database. He filter products by different types of categorys or product tittle that are stored in our database.

@@ -29,7 +29,7 @@ export const searchProduct = ( product ) => dispatch => {
     };
     return axios.get('http://localhost:3000/product/search/'+product.target.value,config).then(result=>{
       
-       console.log(result.data.data);
+       
         dispatch(setProducts(result.data.data)); 
     }).catch(err => {
         dispatch(setProducts([]));    

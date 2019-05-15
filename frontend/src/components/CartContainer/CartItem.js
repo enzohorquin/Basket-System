@@ -12,9 +12,9 @@ export const CartItem = (props) => {
             <li className="list-item">
                 <span className="titulo">{props.title}</span>
                 <span className="precio">{props.price*props.count+'$'}</span>
-                <FontAwesomeIcon icon={faPlus} onClick={() => {props.addCart(props)}} />
+                <FontAwesomeIcon icon={faPlus} style={{'cursor':'pointer'}}onClick={() => {props.addCart(props)}} />
                 <span className="cantidad">{props.count}</span>
-                <FontAwesomeIcon icon={faMinus} onClick={() => {props.deleteCart(props)}} />
+                <FontAwesomeIcon icon={faMinus} style={{'cursor':'pointer'}} onClick={() => {props.deleteCart(props)}} />
               
 
             </li>

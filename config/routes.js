@@ -163,6 +163,10 @@ module.exports = [
         input:{
             params:{},
             body:{
+                cart:{
+                    type:'array',
+                    required:true
+                }
             }
         }
     },

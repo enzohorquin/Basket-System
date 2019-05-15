@@ -6,6 +6,7 @@ import getProducts from './productReducer';
 import cartItems from './cartReducer';
 import searchItem from './searchReducer';
 import paginationItem from './paginationReducer';
+import getOrders from './orderReducer';
 
 export default combineReducers({
     errors: errorReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     products:getProducts,
     list:cartItems,
     search:searchItem,
-    currentPage:paginationItem
+    currentPage:paginationItem,
+    orders:getOrders
 });

@@ -16,18 +16,19 @@ exports.login = (req,res,next) => {
     const { errors, isValid } = validateLoginInput(req.body);
 
     if(!isValid) {
-        return res.status(400).json(errors);
+        
+        return res.status(400).json({errors});
     }
 
    
     mysqlService.executeQuery(queries.userExists,[ email ],(err,results) => {
 
         if(err){
-            res.status(400).json({data:'Internal Server Error'}); 
+            res.status(400).json({errors:'Internal Server Error'}); 
         }
         if(results.length === CERO){
             errors.email = 'User not found'
-                return res.status(404).json(errors); 
+            res.status(400).json({errors}); 
         }else{
             const user = results[0];
         if(bcrypt.compareSync(password,user.password)){
@@ -37,14 +38,13 @@ exports.login = (req,res,next) => {
                 password:user.password, 
                 adress: user.adress
             }
-            let token = jwt.sign(usuario,process.env.SECRET_KEY,{
-              expiresIn:3000
-            })
+            let token = jwt.sign(usuario,process.env.SECRET_KEY)
             
             res.status(200).json({data:token,status:"Usuario Logueado"});
         }else{
+            console.log("LA CONCHA TUYA")
             errors.password = 'Incorrect password';
-            res.status(200).json({errors}); 
+            res.status(400).json({errors}); 
         }
         }
     }); 

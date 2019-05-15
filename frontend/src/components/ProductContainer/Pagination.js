@@ -15,7 +15,7 @@ handleClick = (event) => {
 render(){
 
     const  currentPage  = this.props.currentPage;
-    const productsPerPage = 10;
+    const productsPerPage = 15;
     // Logic for displaying page numbers
     const pageNumbers = [];
     const cant = this.props.products !== undefined ? this.props.products.length : 0 ;

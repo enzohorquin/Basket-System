@@ -11,17 +11,11 @@ exports.create_order = (req,res,next) => {
     let id_order;  
     let products = [] ; 
     
-    mysqlService.executeQuery(queries.getProducts,[ id_user ],(err,results) => {
 
-        if(err){
-            
-            res.status(400).json({data:'Internal Server Error'}); 
-        }
-        else{
+            products = req.body.cart; 
+            console.log(products);
           
-            products = results; 
-          
-            mysqlService.executeQuery(queries.insertOrder,[ id_user ],(err,results) => {
+            mysqlService.executeQuery(queries.insertOrder,[ id_user, new Date() ],(err,results) => {
           
             if(err){
                 
@@ -30,7 +24,7 @@ exports.create_order = (req,res,next) => {
             else{
                 id_order = results.insertId; 
                 for(let i =0 ; i<products.length ; i++){
-                    mysqlService.executeQuery(queries.insertIntoProductOrder,[ id_order, products[i].id_product, products[i].count ],(err,results) => {
+                    mysqlService.executeQuery(queries.insertIntoProductOrder,[ id_order, products[i].id, products[i].count ],(err,results) => {
                        if(err){
                            
                            res.status(400).json({data:'Internal Server Error'}); 
@@ -38,21 +32,14 @@ exports.create_order = (req,res,next) => {
                     
                    }); 
             
-                   mysqlService.executeQuery(queries_cart.deleteProduct,[ products[i].id_product , id_user ],(err,results) => {
-                    if(err){
-                        
-                        res.status(400).json({data:'Internal Server Error'}); 
-                    }
-                 
-                }); 
                } 
                res.status(200).json({status:"Order Creada"}); 
                     
         }
     });    
         }
-    }); 
-}
+    
+
 
 exports.all = (req,res,next) => { 
 
