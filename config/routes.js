@@ -171,7 +171,7 @@ module.exports = [
         }
     },
     {
-        path:'/order/all/:id_user',
+        path:'/order/all',
         entity: 'order',
         method:'all',
         type:'get',

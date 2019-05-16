@@ -1,9 +1,10 @@
-import { SET_CURRENT_USER } from '../actions/type';
+import { SET_CURRENT_USER,CLEAR} from '../actions/type';
 import isEmpty from '../service/is-empty';
 
 const initialState = {
     isAuthenticated: false,
     user: {}
+    
 }
 
 export default function(state = initialState, action ) {
@@ -13,7 +14,9 @@ export default function(state = initialState, action ) {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
                 user: action.payload
+                
             }
+       
         default: 
             return state;
     }

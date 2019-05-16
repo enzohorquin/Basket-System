@@ -6,7 +6,7 @@ import Home from './components/Home';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { Landing } from './components/Landing';
-import { OrderC } from './components/OrderC';
+import  OrderC  from './components/OrderC';
 
 
 

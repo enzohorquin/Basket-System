@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 import jwt_decode from 'jwt-decode'; 
-import { GET_ERRORS,SET_CURRENT_USER } from './type';
+import { GET_ERRORS,SET_CURRENT_USER,CLEAR} from './type';
 
 
 export const logIn = ( user,history ) =>  dispatch => {
@@ -28,12 +28,12 @@ export const logIn = ( user,history ) =>  dispatch => {
     })
 }
 
-export const restoreLogin = (history,path1) => (dispatch) => {
+export const restoreLogin = (history,path1,path2 = '/home') => (dispatch) => {
 
 if(loggedIn()){
   const profile = getProfile(); 
   dispatch(setCurrentUser(profile));
-  history.push('/home');
+  history.push(path2);
 } else {
   history.push(path1);
 }
@@ -97,6 +97,7 @@ export const register = ( newUser,history ) => dispatch => {
 export const logoutUser = (history) => dispatch => {
   sessionStorage.removeItem('user');
   //setAuthToken(false);
+  dispatch({type:CLEAR})
   dispatch(setCurrentUser({}));
   history.push('/login');
 }

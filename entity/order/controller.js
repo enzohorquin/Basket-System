@@ -54,6 +54,7 @@ exports.all = (req,res,next) => {
         else{
           
         if(results.length !== CERO){
+            /*
         
         async.mapLimit(results, 10, (result, cb) => {
             mysqlService.executeQuery(queries_product.getProductById, [result.id_product], (err,results_query) => {
@@ -69,13 +70,14 @@ exports.all = (req,res,next) => {
                 res.status(400).json({data:'Internal Server Error'}); 
             }
             else{
-                res.status(200).json({data:resultados,status:"Compras realizadas obtenidas con exito"});
+                */
+                res.status(200).json({data:results,status:"Compras realizadas obtenidas con exito"});
             }
 
-        });
+       // });
        
     }
         }
-    }); 
+    ); 
 
 }

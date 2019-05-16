@@ -31,7 +31,7 @@ class Navbar extends Component {
                  <Link className="nav-link" to="/order">  <FontAwesomeIcon icon={faHistory} /></Link>
             </li>
             <li>
-                <Link to="/" className="nav-link" onClick={this.onLogout}><FontAwesomeIcon icon={faSignOutAlt} /></Link>
+                <Link to="/login" className="nav-link" onClick={this.onLogout}><FontAwesomeIcon icon={faSignOutAlt} /></Link>
             </li>    
             </ul>
         )

@@ -1,6 +1,6 @@
 import { CLEAR_CART,SET_ORDERS } from './type';
 import axios from 'axios';
-import { getToken } from './user';
+import { getToken,getProfile } from './user';
 export const requestOrder = (cart) => dispatch => {
     
     let array = cart.map (item => { 
@@ -25,12 +25,13 @@ export const requestOrder = (cart) => dispatch => {
 
 }
 
-export const getAllOrders = () => dispatch => {
+export const getAllOrders =  () => async dispatch => {
     let config = {
         headers: {'Authorization': 'Bearer ' + getToken()}
     };
+    console.log(getProfile());
    
-     axios.post('http://localhost:3000/order/all',config).then(result=>{
+    await  axios.get('http://localhost:3000/order/all',config).then(result=>{
         console.log(result);
 
         dispatch({
