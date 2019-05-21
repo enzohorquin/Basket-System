@@ -34,7 +34,7 @@ exports.login = (req,res,next) => {
         if(bcrypt.compareSync(password,user.password)){
             let usuario = {
                 id_user:user.id_user,
-                email:user.password,
+                email:user.email,
                 password:user.password, 
                 adress: user.adress
             }
@@ -42,7 +42,7 @@ exports.login = (req,res,next) => {
             
             res.status(200).json({data:token,status:"Usuario Logueado"});
         }else{
-            console.log("LA CONCHA TUYA")
+            
             errors.password = 'Incorrect password';
             res.status(400).json({errors}); 
         }

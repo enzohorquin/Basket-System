@@ -12,9 +12,7 @@ import { restoreLogin } from '../actions/user';
      this.props.restoreLogin(this.props.history,'/login','/order'); 
      
      this.props.getAllOrders();
-     console.log("EJECUTANDO")
-     
-     
+             
     }
 
     render(){
